@@ -1,4 +1,4 @@
-# MatQuant Mamba GitHub Repository .gitignore
+# MQM GitHub Repository .gitignore
 
 # Exclude everything that could reveal implementation details
 __pycache__/

@@ -1,7 +1,7 @@
 #!/bin/bash
-# MatQuant Mamba High-Frequency Portfolio Analysis
+# MQM High-Frequency Portfolio Analysis
 # ----------------------------------------------
-# This script runs the MatQuant Mamba model analysis on financial data
+# This script runs the MQM model analysis on financial data
 # and generates trading performance reports.
 
 # Default parameters

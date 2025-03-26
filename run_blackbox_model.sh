@@ -1,5 +1,5 @@
 #!/bin/bash
-# MatQuant Mamba Blackbox Model Runner
+# MQM Blackbox Model Runner
 # -----------------------------------
 # This script provides a black-box interface to the proprietary MQM model
 # It runs simulations across different symbols and timeframes, displaying only the results
