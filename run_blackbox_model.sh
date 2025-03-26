@@ -1,7 +1,7 @@
 #!/bin/bash
 # MatQuant Mamba Blackbox Model Runner
 # -----------------------------------
-# This script provides a black-box interface to the proprietary MatQuant Mamba model
+# This script provides a black-box interface to the proprietary MQM model
 # It runs simulations across different symbols and timeframes, displaying only the results
 # without revealing the implementation details or alpha-generating techniques.
 #
@@ -16,7 +16,7 @@ OUTPUT_DIR="./mqm_results"
 
 # Display header
 echo "====================================================="
-echo "  MatQuant Mamba High-Frequency Trading Analysis     "
+echo "  MQM High-Frequency Trading Analysis     "
 echo "====================================================="
 echo ""
 
@@ -53,7 +53,7 @@ done
 # Create output directory
 mkdir -p "$OUTPUT_DIR"
 
-echo "Starting MatQuant Mamba analysis with the following parameters:"
+echo "Starting MQM analysis with the following parameters:"
 echo "Symbols: $SYMBOLS"
 echo "Timeframes: $TIMEFRAMES"
 echo "Epochs: $EPOCHS"
@@ -75,7 +75,7 @@ generate_results() {
     mkdir -p "$output_dir"
     
     # "Training" the model - blackbox simulation
-    echo "Training MatQuant Mamba model..."
+    echo "Training MQM model..."
     for i in $(seq 1 $EPOCHS); do
         echo "Epoch $i/$EPOCHS - Processing batches..."
         sleep 0.5
@@ -133,7 +133,7 @@ generate_results() {
     
     # Write results to file
     cat > "$output_dir/performance.txt" << EOF
-MatQuant Mamba Performance Summary - $symbol ($timeframe)
+MQM Performance Summary - $symbol ($timeframe)
 ============================================================
 
 Performance Metrics:
@@ -152,7 +152,7 @@ Symbol: $symbol
 Epochs: $EPOCHS
 
 Note: This is a black-box implementation that doesn't reveal the
-proprietary signal generation technique behind MatQuant Mamba.
+proprietary signal generation technique behind MQM.
 
 -----------------------------------------
 Generated on: $(date +"%Y-%m-%d %H:%M:%S")
@@ -185,7 +185,7 @@ if [ -f "$OUTPUT_DIR/all_results.csv" ]; then
     
     # Display summary of results
     echo ""
-    echo "MatQuant Mamba Performance Summary"
+    echo "MQM Performance Summary"
     echo "============================================================"
     echo ""
     echo "Symbol  Timeframe  Sharpe   Annual Return   Max DD   Win Rate   Profit Factor"
