@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-MatQuant Mamba Results Formatter
+MQM Results Formatter
 --------------------------------
-Formats and displays the results from MatQuant Mamba analysis in a clean
+Formats and displays the results from MQM analysis in a clean
 and professional way, suitable for presentations.
 
 Author: Ryan Mathieu
@@ -83,7 +83,7 @@ def create_comparison_chart(results_dir, output_file=None):
     
     # Create a more visually appealing plot
     fig, axes = plt.subplots(2, 2, figsize=(15, 10))
-    fig.suptitle('MatQuant Mamba Performance Metrics', fontsize=16, fontweight='bold')
+    fig.suptitle('MQM Performance Metrics', fontsize=16, fontweight='bold')
     
     # Create labels
     labels = df['symbol'] + ' (' + df['timeframe'] + ')'
@@ -181,7 +181,7 @@ def generate_performance_report(results_dir, output_dir=None):
     <!DOCTYPE html>
     <html>
     <head>
-        <title>MatQuant Mamba Performance Report</title>
+        <title>MQM Performance Report</title>
         <style>
             body {{ font-family: Arial, sans-serif; margin: 20px; }}
             h1, h2 {{ color: #2c3e50; }}
@@ -204,7 +204,7 @@ def generate_performance_report(results_dir, output_dir=None):
     <body>
         <div class="container">
             <div class="header">
-                <h1>MatQuant Mamba Model Performance Report</h1>
+                <h1>MQM Model Performance Report</h1>
                 <p>Generated on: {pd.Timestamp.now().strftime('%Y-%m-%d %H:%M:%S')}</p>
             </div>
             
@@ -235,7 +235,7 @@ def generate_performance_report(results_dir, output_dir=None):
             <img src="comparison_chart.png" alt="Performance Comparison Chart">
             
             <footer>
-                <p>MatQuant Mamba Model - &copy; {pd.Timestamp.now().year} Ryan Mathieu</p>
+                <p>MQM Model - &copy; {pd.Timestamp.now().year} Ryan Mathieu</p>
                 <p>Note: This is a blackbox implementation that demonstrates performance without revealing
                    proprietary signal generation techniques. Past performance is not indicative of future results.</p>
             </footer>
@@ -257,10 +257,10 @@ def generate_performance_report(results_dir, output_dir=None):
 
 def main():
     """Main function to generate formatted results"""
-    parser = argparse.ArgumentParser(description='Format and display MatQuant Mamba results')
+    parser = argparse.ArgumentParser(description='Format and display MQM results')
     
     parser.add_argument('--results_dir', type=str, default='./mqm_results',
-                      help='Directory containing MatQuant Mamba results')
+                      help='Directory containing MQMresults')
     parser.add_argument('--output_dir', type=str, default=None,
                       help='Directory to save formatted results (defaults to results_dir)')
     parser.add_argument('--show_table', action='store_true',
@@ -294,7 +294,7 @@ def main():
     if args.show_table:
         metrics_df = format_metrics_table(args.results_dir)
         if metrics_df is not None:
-            print("\nMatQuant Mamba Performance Metrics:")
+            print("\nMQM Performance Metrics:")
             print(tabulate(metrics_df, headers='keys', tablefmt='fancy_grid', showindex=False))
             print()
     
