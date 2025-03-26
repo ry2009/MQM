@@ -40,10 +40,10 @@ def percentage_formatter(x, pos):
 def format_metrics_table(results_dir):
     """Create a nicely formatted table of metrics"""
     # Load the metrics summary
-    metrics_file = os.path.join(results_dir, 'performance_summary.csv')
+    metrics_file = os.path.join(results_dir, 'all_results.csv')
     
     if not os.path.exists(metrics_file):
-        print(f"Error: Performance summary not found at {metrics_file}")
+        print(f"Error: Results file not found at {metrics_file}")
         return None
     
     df = pd.read_csv(metrics_file)
@@ -51,11 +51,9 @@ def format_metrics_table(results_dir):
     # Format the table nicely
     # Convert numeric columns to appropriate formats
     formatted_df = df.copy()
-    formatted_df['total_return'] = formatted_df['total_return'].map(lambda x: f'{x:.2f}%')
     formatted_df['annual_return'] = formatted_df['annual_return'].map(lambda x: f'{x:.2f}%')
-    formatted_df['volatility'] = formatted_df['volatility'].map(lambda x: f'{x:.2f}%')
-    formatted_df['sharpe_ratio'] = formatted_df['sharpe_ratio'].map(lambda x: f'{x:.2f}')
     formatted_df['max_drawdown'] = formatted_df['max_drawdown'].map(lambda x: f'{x:.2f}%')
+    formatted_df['sharpe_ratio'] = formatted_df['sharpe_ratio'].map(lambda x: f'{x:.2f}')
     formatted_df['win_rate'] = formatted_df['win_rate'].map(lambda x: f'{x:.2f}%')
     formatted_df['profit_factor'] = formatted_df['profit_factor'].map(lambda x: f'{x:.2f}')
     
@@ -63,10 +61,8 @@ def format_metrics_table(results_dir):
     formatted_df = formatted_df.rename(columns={
         'symbol': 'Symbol',
         'timeframe': 'Timeframe',
-        'total_return': 'Total Return',
-        'annual_return': 'Ann. Return',
-        'volatility': 'Volatility',
         'sharpe_ratio': 'Sharpe',
+        'annual_return': 'Ann. Return',
         'max_drawdown': 'Max DD',
         'win_rate': 'Win Rate',
         'profit_factor': 'Profit Factor'
@@ -77,10 +73,10 @@ def format_metrics_table(results_dir):
 def create_comparison_chart(results_dir, output_file=None):
     """Create and save a chart comparing performance across symbols/timeframes"""
     # Load the metrics summary
-    metrics_file = os.path.join(results_dir, 'performance_summary.csv')
+    metrics_file = os.path.join(results_dir, 'all_results.csv')
     
     if not os.path.exists(metrics_file):
-        print(f"Error: Performance summary not found at {metrics_file}")
+        print(f"Error: Results file not found at {metrics_file}")
         return
     
     df = pd.read_csv(metrics_file)
@@ -240,8 +236,8 @@ def generate_performance_report(results_dir, output_dir=None):
             
             <footer>
                 <p>MatQuant Mamba Model - &copy; {pd.Timestamp.now().year} Ryan Mathieu</p>
-                <p>Note: Past performance is not indicative of future results. This model simulation 
-                incorporates realistic transaction costs, slippage, and market impact.</p>
+                <p>Note: This is a blackbox implementation that demonstrates performance without revealing
+                   proprietary signal generation techniques. Past performance is not indicative of future results.</p>
             </footer>
         </div>
     </body>
@@ -279,6 +275,12 @@ def main():
     # Check if results directory exists
     if not os.path.exists(args.results_dir):
         print(f"Error: Results directory not found: {args.results_dir}")
+        return 1
+    
+    # Check if the results file exists
+    results_file = os.path.join(args.results_dir, 'all_results.csv')
+    if not os.path.exists(results_file):
+        print(f"Error: Results file not found: {results_file}")
         return 1
     
     # Set output directory

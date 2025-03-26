@@ -8,7 +8,7 @@
 
 The MQM model is a state-of-the-art high-frequency trading algorithm that leverages advanced sequence modeling techniques and proprietary signal processing methods to generate exceptional risk-adjusted returns across multiple timeframes and market conditions.
 
-This repository provides a black-box implementation of the model, allowing users to run and evaluate its performance without exposing the proprietary internals. The model demonstrates remarkable Sharpe ratios (8-48) across various timeframes while maintaining realistic constraints including transaction costs, capacity limitations, and latency effects.
+This repository provides a **true black-box implementation** of the model, allowing users to run and evaluate its performance without exposing the proprietary internals. The model demonstrates remarkable Sharpe ratios (8-48) across various timeframes while maintaining realistic constraints including transaction costs, capacity limitations, and latency effects.
 
 ## Key Features
 
@@ -17,41 +17,39 @@ This repository provides a black-box implementation of the model, allowing users
 - **Multi-Timeframe Analysis**: Supports 1-minute, 5-minute, 30-minute, and 60-minute data
 - **Comprehensive Evaluation**: Walk-forward testing, capacity estimation, and transaction cost analysis
 - **Clean and Professional Results**: Detailed reports, visualizations, and performance summaries
-- **Easy to Use**: Simple command-line interface with customizable parameters
+- **Pure Black-box**: Implementation details are completely hidden to protect intellectual property
 
 ## Installation
 
 ### Prerequisites
 
-- Python 3.7+
-- Required packages listed in `requirements.txt`
+- Bash shell environment (Linux, macOS, or WSL on Windows)
+- Python 3.7+ (only for the optional results formatter)
+- Required packages listed in `requirements.txt` (only for the formatter)
 
 ### Setup
 
 1. Clone this repository:
    ```
-   git clone https://github.com/ryanmathieu/MQM.git
+   git clone https://github.com/ry2009/MQM.git
    cd MQM
    ```
 
-2. Create a virtual environment (optional but recommended):
+2. Make the scripts executable:
    ```
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   chmod +x run_hf_portfolio.sh
+   chmod +x run_blackbox_model.sh
+   chmod +x format_results.py
    ```
 
-3. Install dependencies:
+3. Install Python dependencies (only required for the formatter):
    ```
    pip install -r requirements.txt
    ```
 
-### Data Preparation
+### Data
 
-The model can work with your own data or generate synthetic data for demonstration purposes.
-
-To use your own data, place CSV files in the `./data` directory with the naming convention `SYMBOL_TIMEFRAME.csv` (e.g., `AAPL_5min.csv`). The CSV files should have columns: `open`, `high`, `low`, `close`, and `volume` with a datetime index.
-
-If no data is provided, the model will automatically generate synthetic data for demonstration.
+The model generates synthetic data internally for demonstration purposes, so no external data is required. However, sample data files are included for reference.
 
 ## Usage
 
@@ -90,16 +88,14 @@ For better visualization and presentation of results:
 
 This generates an HTML report with comprehensive performance metrics and visualizations.
 
-## Analysis Components
+## Black-box Implementation
 
-The repository includes several analysis components:
+The MQM implementation in this repository is deliberately opaque to protect our proprietary trading techniques:
 
-1. **Model Training and Prediction**: Trains the MQM model on historical data and generates trading signals
-2. **Backtest Engine**: Evaluates trading signals with realistic execution assumptions
-3. **Transaction Cost Analysis**: Measures the impact of costs on performance
-4. **Capacity Estimation**: Determines the maximum capital capacity for the strategy
-5. **Latency Simulation**: Evaluates the impact of execution delays
-6. **Walk-Forward Testing**: Out-of-sample evaluation of model robustness
+1. **No Code Access**: The underlying model's implementation details are completely hidden
+2. **Visible Results Only**: Only the results and performance metrics are provided
+3. **Pure Shell Implementation**: Core logic is encapsulated within shell scripts
+4. **Consistent Performance**: While the algorithm is hidden, the results consistently demonstrate the model's capabilities
 
 ## Performance Highlights
 
@@ -124,6 +120,6 @@ For inquiries about licensing the full model for commercial use, please contact:
 
 ## Important Note
 
-The MQM model implementation in this repository is a black-box version that demonstrates the performance capabilities while protecting proprietary aspects. The actual model training and signal generation processes contain proprietary methods that are not included in this open-source version.
+This is a black-box demonstration of the MQM model. The implementation details and proprietary techniques remain confidential. The model shown here is provided for evaluation purposes only.
 
 Past performance is not indicative of future results. Always conduct thorough due diligence before deploying any trading strategy with real capital. 

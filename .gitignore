@@ -1,9 +1,74 @@
 # MatQuant Mamba GitHub Repository .gitignore
 
-# Byte-compiled / optimized / DLL files
+# Exclude everything that could reveal implementation details
 __pycache__/
 *.py[cod]
 *$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Exclude all Python files except the essential formatter
+*.py
+!format_results.py
+
+# Exclude all Jupyter notebooks
+*.ipynb
+
+# Exclude analysis files and folders
+bit_analysis/
+tca_results*/
+simplified_tests/
+MatQuant_Mamba_Backtest_Summary.md
+RUNNING.md
+capacity_estimation.py
+enhanced_comparison.py
+finacial_matquant.py
+flip_predictions.py
+latency_simulation.py
+portfolio_backtest.py
+run_analysis.py
+run_financial_mamba.py
+run_MQM.py
+setup_and_test.py
+transaction_costs.py
+walkforward_testing.py
+
+# Exclude test data files
+intraday*.csv
+
+# Keep only the essential shell scripts
+!run_blackbox_model.sh
+!run_hf_portfolio.sh
+!test_blackbox.sh
+
+# Virtual environment
+venv/
+.env
+
+# Editor specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS specific files
+.DS_Store
+Thumbs.db
 
 # Distribution / packaging
 dist/
@@ -13,19 +78,10 @@ build/
 # Jupyter Notebook
 .ipynb_checkpoints
 
-# Virtual environments
-venv/
-env/
-ENV/
-
 # IDE files
 .idea/
 .vscode/
 *.code-workspace
-
-# OS specific files
-.DS_Store
-Thumbs.db
 
 # Log files
 *.log

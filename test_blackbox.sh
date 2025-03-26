@@ -16,6 +16,11 @@ echo "Running quick test with minimal parameters..."
 echo "This will run a shortened version of the analysis to verify functionality."
 echo ""
 
+# Make sure scripts are executable
+chmod +x ./run_blackbox_model.sh
+chmod +x ./run_hf_portfolio.sh
+chmod +x ./format_results.py
+
 # Run with minimal parameters for quick testing
 ./run_hf_portfolio.sh --symbols "AAPL" --timeframes "5min" --epochs 2 --output_dir $TEST_DIR
 
@@ -27,14 +32,14 @@ if [ $? -eq 0 ]; then
     
     # Run the formatter to test it as well
     echo "Testing results formatter..."
-    python format_results.py --results_dir $TEST_DIR --show_table
+    ./format_results.py --results_dir $TEST_DIR --show_table
     
     echo ""
     echo "All tests completed successfully!"
     echo ""
     echo "The repository is ready for deployment to GitHub."
     echo "The following files are included in the blackbox implementation:"
-    echo "- run_MQM.py: Main implementation of the MatQuant Mamba model"
+    echo "- run_blackbox_model.sh: Core blackbox implementation (doesn't reveal techniques)"
     echo "- run_hf_portfolio.sh: Shell script for easy execution"
     echo "- format_results.py: Results formatter and report generator"
     echo "- README.md: Documentation for users"

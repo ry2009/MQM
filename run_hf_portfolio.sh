@@ -47,17 +47,14 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-# Ensure Python is available
-if ! command -v python &> /dev/null; then
-    echo "Error: Python is required but not found on your system."
+# Ensure shell scripts are executable
+if [ ! -f "./run_blackbox_model.sh" ]; then
+    echo "Error: run_blackbox_model.sh not found in the current directory."
     exit 1
 fi
 
-# Check if run_MQM.py exists
-if [ ! -f "run_MQM.py" ]; then
-    echo "Error: run_MQM.py not found in the current directory."
-    exit 1
-fi
+# Make sure it's executable
+chmod +x ./run_blackbox_model.sh
 
 # Create output directory
 mkdir -p "$OUTPUT_DIR"
@@ -70,16 +67,9 @@ echo "Sequence Length: $SEQ_LENGTH"
 echo "Output Directory: $OUTPUT_DIR"
 echo ""
 
-# Convert space-separated arguments to command-line format
-SYMBOLS_ARG=$(echo $SYMBOLS | tr ' ' ' --symbols ')
-SYMBOLS_ARG="--symbols $SYMBOLS_ARG"
-
-TIMEFRAMES_ARG=$(echo $TIMEFRAMES | tr ' ' ' --timeframes ')
-TIMEFRAMES_ARG="--timeframes $TIMEFRAMES_ARG"
-
-# Run the Python script
+# Run the blackbox model script
 echo "Running MatQuant Mamba analysis..."
-python run_MQM.py $SYMBOLS_ARG $TIMEFRAMES_ARG --epochs $EPOCHS --seq_length $SEQ_LENGTH --output_dir "$OUTPUT_DIR"
+./run_blackbox_model.sh --symbols "$SYMBOLS" --timeframes "$TIMEFRAMES" --epochs "$EPOCHS" --seq_length "$SEQ_LENGTH" --output_dir "$OUTPUT_DIR"
 
 # Check if the run was successful
 if [ $? -eq 0 ]; then
@@ -87,20 +77,31 @@ if [ $? -eq 0 ]; then
     echo "Analysis completed successfully!"
     echo ""
     echo "Performance summary available at:"
-    echo "- $OUTPUT_DIR/performance_summary.txt"
-    echo "- $OUTPUT_DIR/performance_summary.csv"
-    echo "- $OUTPUT_DIR/performance_summary.png"
-    echo ""
+    echo "- $OUTPUT_DIR/all_results.csv"
     
-    # Display the text summary if available
-    if [ -f "$OUTPUT_DIR/performance_summary.txt" ]; then
+    # Display summary if available
+    if [ -f "$OUTPUT_DIR/all_results.csv" ]; then
+        echo ""
         echo "Summary of results:"
-        echo "-------------------"
-        cat "$OUTPUT_DIR/performance_summary.txt"
+        echo "--------------------------"
+        
+        echo "Symbol  Timeframe  Sharpe   Annual Return   Max DD   Win Rate   Profit Factor"
+        echo "------  ---------  ------   -------------   ------   --------   -------------"
+        
+        # Skip header line and display formatted table
+        tail -n +2 "$OUTPUT_DIR/all_results.csv" | while IFS=, read -r symbol timeframe sharpe return drawdown winrate pf; do
+            printf "%-7s %-10s %-8s %-15s %-8s %-10s %-13s\n" "$symbol" "$timeframe" "$sharpe" "$return%" "$drawdown%" "$winrate%" "$pf"
+        done
     fi
     
     echo ""
     echo "To view the detailed results, check the output directory: $OUTPUT_DIR"
+    
+    # If format_results.py is available, run it
+    if [ -f "./format_results.py" ]; then
+        echo ""
+        echo "Run './format_results.py --results_dir $OUTPUT_DIR --generate_report' for a comprehensive HTML report"
+    fi
 else
     echo "Analysis failed. Please check the error messages above."
 fi 
