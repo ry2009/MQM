@@ -155,3 +155,19 @@ summarize_flipped.py
 test_*.py
 analyze_*.py
 compare_*.py 
+# Additional exclusions
+matquant_*
+mamba_*
+enhanced_comparison/
+financial_logs/
+flipped_*
+matquant_*
+mft_*
+model_comparison/
+paper.md
+portfolio_comparison/
+predictions_*
+run_*_backtest.sh
+straddle_*
+test_predictions*
+trading_*
