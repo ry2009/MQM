@@ -101,19 +101,24 @@ The MQM implementation in this repository is deliberately opaque to protect our 
 
 The MQM model consistently achieves:
 
-- **Sharpe Ratios**: 3+ (varies by timeframe and symbol)
+- **Sharpe Ratios**: 3+ starting at mft (varies by timeframe and symbol but this config is for hft data only at 8+ sharpe)
 - **Annual Returns**: 80-320% (before leverage)
 - **Win Rates**: 58-65%
 - **Maximum Drawdowns**: -2.5% to -7.5%
 - **Profit Factors**: 2.8-3.5
 
- Bit-width | Dynamic Assignment | Temperature | MSE (↓) | CRPS (↓) |
+#### Ablation Results
+
+The following table summarizes the Mean Squared Error (MSE) and Continuous Ranked Probability Score (CRPS) across different configurations on the ETTh1 dataset:
+
+| Bit-width | Dynamic Assignment | Temperature | MSE (↓) | CRPS (↓) |
 |-----------|--------------------|-------------|---------|----------|
-| 8-bit     | No                 | 1.0         | **0.0880**  | **0.2184**   |
+| 8-bit     | No                 | 1.0         | 0.0880  | 0.2184   |
 | 4-bit     | No                 | 2.0         | 0.1110  | 0.2478   |
 | 4-bit     | Yes                | 2.0         | 0.7965  | 0.4868   |
 | 2-bit     | No                 | 4.0         | 0.3531  | 0.4080   |
 | 2-bit     | Yes                | 4.0         | **0.2609**  | **0.3849**   |
+
 
 ##### ETTh1 Dataset (24-hour Forecasting)
 
