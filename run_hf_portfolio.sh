@@ -13,7 +13,7 @@ OUTPUT_DIR="./mqm_results"
 
 # Display header
 echo "====================================================="
-echo "  MatQuant Mamba High-Frequency Portfolio Analysis   "
+echo "  MQM High-Frequency Portfolio Analysis   "
 echo "====================================================="
 echo ""
 
@@ -68,7 +68,7 @@ echo "Output Directory: $OUTPUT_DIR"
 echo ""
 
 # Run the blackbox model script
-echo "Running MatQuant Mamba analysis..."
+echo "Running MQM analysis..."
 ./run_blackbox_model.sh --symbols "$SYMBOLS" --timeframes "$TIMEFRAMES" --epochs "$EPOCHS" --seq_length "$SEQ_LENGTH" --output_dir "$OUTPUT_DIR"
 
 # Check if the run was successful
