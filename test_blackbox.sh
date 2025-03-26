@@ -1,10 +1,10 @@
 #!/bin/bash
-# Test script for MatQuant Mamba blackbox GitHub repository
+# Test script for MQM blackbox GitHub repository
 # -----------------------------------------------------
 # This script runs a quick test of the entire setup
 
 echo "====================================================="
-echo "  MatQuant Mamba Blackbox GitHub Repository Test     "
+echo "  MQM Blackbox GitHub Repository Test     "
 echo "====================================================="
 echo ""
 
